@@ -1,0 +1,48 @@
+
+ 계정 바꿔서 등록 
+ 게정 바꾸는 장법 
+ 1.  먼저, github에 repository를 만든다. 
+ 2. 내가 만들 위치로 온다 . 
+ 3. 키를 생성을 하는데 
+    $ ssh-keygen -t rsa -C "pyenkr93@gmail.com"
+    위와 같은 명령어를 실행한다. 
+ 4. 키를 덮어쓰기 하지 않고 새로운 키를 생성한다. 
+    --- 다음과 같이 나타난다. 
+    Enter a file in which to save the key (c:/Users/NC123/.ssh/id_rsa): c:/Users/NC123/.ssh/id_rsa_second
+    c:/Users/NC123/.ssh/id_rsa_second 라고 입력했다. 
+    그렇게 되면 .ssh안의 폴더에 id_rsa, id_rsa.pub, id_rsa_second, id_rsa_second.pub 네개가 된다. 
+    pub이라고 써져있는게 public키 공개키 이다. 
+
+ 5. $ cat id_rsa_second.pub 
+    명령어를 통해 안의 내용 모두를 github에 등록한다. 
+ 6. 위치는 
+    profile > Settings > SSH and GPG keys 에 새로운 키를 등록하면 된다. 
+
+ 7. 그리고 프로젝트 폴더에 가게 되면 config user.name 과 user.email은 기존의 것으로 되어있는것을 
+    확인할 수 있으므로 이것을 
+    $ git config user.name "yy9320"
+    $ git config user.email "pyenkr93@gmail.com"
+    이라고 두개 입력하고 commit 및 push 하게 되면 된다. 
+
+
+  * ps.
+    그 외적으로 .ssh/config 의 파일에 내가 second로 github에 올린다로 알리기 위해서 해하는 일이 있다. 
+
+   ========================================
+   # github
+	Host github.com-second
+    	HostName github.com
+    	User yy9320
+    	IdentityFile ~/.ssh/id_rsa_second
+   =========================================
+   위와같이 config파일에 추가를 해줘야 한다. 
+   또한 origin master를 만들때도 다음과 같이 해줘야 한다. 
+   
+   $ git remote add origin git@github.com-second:yy9320/gitgittest.git
+   ** 중요한 부분은 위 config 부분에서 Host에 등록해놓은 github.com-second가 가장 중요하다. **
+
+   *** 만약 ***
+   위 주소를 잘못입력해서 remote 경로를 수정해야할 때에는 다음 명령어를 이용해서 url을 수정한다. 
+   $ git remote set-url origin git@github.com-second:yy9320/gitgittest.git
+   
+   그리고 push 하면 끝~~~
