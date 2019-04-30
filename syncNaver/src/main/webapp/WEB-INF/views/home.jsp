@@ -45,17 +45,17 @@
       <h3 class="masthead-brand">Cover</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="naver">Features</a>
         <a class="nav-link" href="#">Contact</a>
       </nav>
     </div>
   </header>
 
   <main role="main" class="inner cover">
-    <h1 class="cover-heading">Cover your page.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+    <h1 class="cover-heading">Hi my name is Yeyeun </h1>
+    <p class="lead">This is my Web Page. I start making peristalsis Site with Naver. </p>
     <p class="lead">
-      <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+      <a href="#" class="btn btn-lg btn-secondary">do it</a>
     </p>
   </main>
 
