@@ -16,9 +16,9 @@
     <title>Signin Template · Bootstrap</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
-
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- Bootstrap core CSS -->
-<link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <style>
@@ -39,10 +39,29 @@
     </style>
     <!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
+    <script type="text/javascript">
+      	
+//       	$(function() {
+//       	    $("#requestBtn").on("click", function() {
+//       	        $.ajax("https://nid.naver.com/oauth2.0/authorize")
+//       	        .done(function() {
+//       	            alert("요청 성공");
+//       	        })
+//       	        .fail(function() {
+//       	            alert("요청 실패");
+//       	        })
+//       	        .always(function() {
+//       	            alert("요청 완료");
+//       	        });
+//       	    });
+
+//       	});
+    </script>
   </head>
   <body class="text-center">
+   
     <form class="form-signin">
-  <img class="mb-4" src="/images/naver.png" alt="" width="72" height="72">
+  <img class="mb-4" src="/images/yeony.jpg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" class="form-control" placeholder="Naver ID" required autofocus>
@@ -52,9 +71,21 @@
     <label>
       <input type="checkbox" value="remember-me"> Remember me
     </label>
+  <div id="naver_id_login"></div>
+   <script type="text/javascript">
+	   var clientId = "2OckOgKg6tKGkEyvzWXs";
+		var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/blog");
+	 	var state = naver_id_login.getUniqState();
+	 	naver_id_login.setButton("white", 2,40);
+	 	naver_id_login.setDomain("127.0.0.1");
+	 	naver_id_login.setState(state);
+	 	naver_id_login.setPopup();
+	 	naver_id_login.init_naver_id_login();
+   </script>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" href ="https://nid.naver.com/oauth2.0/authorize">Sign in</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>
 </body>
+
 </html>

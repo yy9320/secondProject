@@ -50,4 +50,12 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value = "loginoath", method = RequestMethod.GET)
+	public String loginaoth(Locale locale, Model model) {
+		
+		
+		return "/naver/loginOath";
+		
+	}
+	
 }
