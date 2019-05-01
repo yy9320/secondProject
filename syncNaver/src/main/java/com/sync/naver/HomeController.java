@@ -34,11 +34,19 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "naver", method = RequestMethod.GET)
-	public String naverPage(Locale locale, Model model) {
+	@RequestMapping(value = "blog", method = RequestMethod.GET)
+	public String blogHomePage(Locale locale, Model model) {
 		
 		
-		return "/naver/naverHome";
+		return "/blog/blogHomePage";
+		
+	}
+	
+	@RequestMapping(value = "naverLogin", method = RequestMethod.GET)
+	public String naverLoginPage(Locale locale, Model model) {
+		
+		
+		return "/naver/naverLoginPage";
 		
 	}
 	
