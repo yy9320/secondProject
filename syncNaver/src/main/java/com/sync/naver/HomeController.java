@@ -20,7 +20,7 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	// home page.
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -34,7 +34,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "blog", method = RequestMethod.GET)
+	@RequestMapping(value = "blog.do", method = RequestMethod.GET)
 	public String blogHomePage(Locale locale, Model model) {
 		
 		
@@ -42,7 +42,7 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "naverLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "naverLogin.do", method = RequestMethod.GET)
 	public String naverLoginPage(Locale locale, Model model) {
 		
 		
@@ -50,11 +50,21 @@ public class HomeController {
 		
 	}
 	
-	@RequestMapping(value = "loginoath", method = RequestMethod.GET)
+	@RequestMapping(value = "loginoath.do", method = RequestMethod.GET)
 	public String loginaoth(Locale locale, Model model) {
+		String token ="";
 		
 		
 		return "/naver/loginOath";
+		
+	}
+	
+	@RequestMapping(value = "profileimage.do", method = RequestMethod.POST)
+	public String profileImgae(Locale locale, Model model) {
+		String token ="";
+		logger.debug("token을 가지고 오고 싶다구 ");
+		
+		return "";
 		
 	}
 	

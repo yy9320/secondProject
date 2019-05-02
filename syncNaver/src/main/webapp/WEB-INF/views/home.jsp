@@ -45,7 +45,7 @@
       <h3 class="masthead-brand">Cover</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="blog">blog</a>
+        <a class="nav-link" href="blog.do">blog</a>
         <a class="nav-link" href="http://www.github.com/yy9320">gitHub</a>
       </nav>
     </div>

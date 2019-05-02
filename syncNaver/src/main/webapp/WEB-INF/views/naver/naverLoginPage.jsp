@@ -74,7 +74,7 @@
   <div id="naver_id_login"></div>
    <script type="text/javascript">
 	   var clientId = "2OckOgKg6tKGkEyvzWXs";
-		var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/blog");
+		var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/loginoath.do");
 	 	var state = naver_id_login.getUniqState();
 	 	naver_id_login.setButton("white", 2,40);
 	 	naver_id_login.setDomain("127.0.0.1");
