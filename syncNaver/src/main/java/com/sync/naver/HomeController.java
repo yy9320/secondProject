@@ -1,15 +1,23 @@
 package com.sync.naver;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -44,7 +52,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "naverLogin.do", method = RequestMethod.GET)
 	public String naverLoginPage(Locale locale, Model model) {
-		
+		logger.info("naverLogin.do ");
 		
 		return "/naver/naverLoginPage";
 		
@@ -53,18 +61,58 @@ public class HomeController {
 	@RequestMapping(value = "loginoath.do", method = RequestMethod.GET)
 	public String loginaoth(Locale locale, Model model) {
 		String token ="";
-		
+		logger.info("loginoath.do ");
 		
 		return "/naver/loginOath";
 		
 	}
 	
-	@RequestMapping(value = "profileimage.do", method = RequestMethod.POST)
-	public String profileImgae(Locale locale, Model model) {
-		String token ="";
-		logger.debug("token을 가지고 오고 싶다구 ");
+	@RequestMapping(value = "profileimage.do", produces="application/json;charset=UTF-8" , method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject profileImgae(Locale locale, Model model, @RequestBody String data) {
+		JSONObject result = new JSONObject();
+		logger.info("token을 가지고 오고 싶다구 token " + data);
+//		model.addAttribute("token",token);
+		result.put("token", data);
 		
-		return "";
+		String token = data;// 네이버 로그인 접근 토큰;
+        String header = "Bearer " + token; // Bearer 다음에 공백 추가
+        try {
+            String apiURL = "https://openapi.naver.com/v1/nid/me";
+            URL url = new URL(apiURL);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Authorization", header);
+            int responseCode = con.getResponseCode();
+            BufferedReader br;
+            if(responseCode==200) { // 정상 호출
+                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } else {  // 에러 발생
+                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = br.readLine()) != null) {
+                response.append(inputLine);
+            }
+            br.close();
+            System.out.println(response.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return result;
 		
 	}
 	
