@@ -1,0 +1,3 @@
+
+ $ git diff  syncNaver/src/main/webapp/WEB-INF/views/naver/loginOath.jsp
+ 이런 형태로 파일을 하면 이 전버전과 head와 뭐가 다른지 차이를 볼수 있다. 
