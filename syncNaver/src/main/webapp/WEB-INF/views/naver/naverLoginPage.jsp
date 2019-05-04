@@ -20,7 +20,6 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- Bootstrap core CSS -->
 
-
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -40,22 +39,20 @@
     <!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
     <script type="text/javascript">
-      	
-//       	$(function() {
-//       	    $("#requestBtn").on("click", function() {
-//       	        $.ajax("https://nid.naver.com/oauth2.0/authorize")
-//       	        .done(function() {
-//       	            alert("요청 성공");
-//       	        })
-//       	        .fail(function() {
-//       	            alert("요청 실패");
-//       	        })
-//       	        .always(function() {
-//       	            alert("요청 완료");
-//       	        });
-//       	    });
-
-//       	});
+    function tokenReload (){
+    	var url = 'tokenReload.do'
+	    $.post(url, token, function(data){
+		    alert(data.token);    //gddong
+		}, "json");
+    	
+    }
+    function tokenDelete (){
+    	var url = 'tokenDelete.do'
+	    $.post(url, token, function(data){
+		    alert(data.token);    //gddong
+		}, "json");
+    	
+    }
     </script>
   </head>
   <body class="text-center">
@@ -74,7 +71,7 @@
   <div id="naver_id_login"></div>
    <script type="text/javascript">
 	   var clientId = "2OckOgKg6tKGkEyvzWXs";
-		var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/loginoath.do");
+		var naver_id_login = new naver_id_login(clientId, "http://127.0.0.1/loginoath.do");
 	 	var state = naver_id_login.getUniqState();
 	 	naver_id_login.setButton("white", 2,40);
 	 	naver_id_login.setDomain("127.0.0.1");
@@ -84,6 +81,8 @@
    </script>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit" href ="https://nid.naver.com/oauth2.0/authorize">Sign in</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" onClick = 'tokenReload()'>갱신</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" onClick = 'tokenDelete()'>삭제</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
 </form>
 </body>

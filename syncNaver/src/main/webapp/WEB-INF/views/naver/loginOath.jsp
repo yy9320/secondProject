@@ -9,8 +9,6 @@
 		border-width: 0;
 	}
 </style>
-</head>
-<body>
 <script type="text/javascript">
 	var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/loginoath.do");
 	naver_id_login.get_naver_userprofile("naverSignInCallback()");
@@ -23,24 +21,39 @@
 	  // 접근 토큰 값 출력
 	  // 네이버 사용자 프로필 조회
 	  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+	alert(naver_id_login.oauthParams.access_token);
+	alert(naver_id_login.oauthParams.refresh_token);
 	function naverSignInCallback() {
-	    alert(naver_id_login.getProfileData('email'));
-	    alert(naver_id_login.getProfileData('birthday'));
-	    alert(naver_id_login.getProfileData('gender'));
-	    alert(naver_id_login.getProfileData('id'));
-	    alert(naver_id_login.getProfileData('nickname'));
-	    alert(naver_id_login.getProfileData('profile_image'));
-	    alert(naver_id_login.getProfileData('name'));
-	    $('#email').val(naver_id_login.getProfileData('email'));
-	    $('#birthday').val(naver_id_login.getProfileData('birthday'));
-	    $('#gender').val(naver_id_login.getProfileData('gender'));
-	    $('#id').val(naver_id_login.getProfileData('id'));
-	    $('#nickname').val(naver_id_login.getProfileData('nickname'));
-	    $('#name').val(naver_id_login.getProfileData('name'));
-	    $('#profile').attr('src',naver_id_login.getProfileData('profile_image'));
+	    $('#email').text(naver_id_login.getProfileData('email'));
+// 	    $('#email').text('메롱이다');
+	    $('#birthday').text(naver_id_login.getProfileData('birthday'));
+	    $('#gender').text(naver_id_login.getProfileData('gender'));
+	    $('#id').text(naver_id_login.getProfileData('id'));
+	    $('#nickname').text(naver_id_login.getProfileData('nickname'));
+	    $('#name').text(naver_id_login.getProfileData('name'));
+	    $('#profile').text('src',naver_id_login.getProfileData('profile_image'));
 	}
+	function tokenDelete (){
+		var token = naver_id_login.oauthParams.access_token;
+    	var url = 'tokenDelete.do'
+	    $.post(url, token, function(data){
+		    alert(data.token);    //gddong
+		}, "json");
+    	
+    }
+	function tokenReload(){
+		var token = naver_id_login.oauthParams.refresh_token;
+    	var url = 'tokenReload.do'
+	    $.post(url, token, function(data){
+		    alert(data.token);    //gddong
+		}, "json");
+    	
+    }
 </script>
 
+</head>
+<body>
+	
 <div>
 	<table>
 		<tr>
@@ -49,31 +62,34 @@
 		</tr>
 		<tr>
 		  <td>email</td>
-		  <td> <input  id ='email'></td>
+		  <td id ='email'></td>
 		</tr>
 		<tr>
 		  <td>birthday</td>
-		  <td ><input id ='birthday'></td>
+		  <td id ='birthday'></td>
 		</tr>
 		<tr>
 		  <td>gender</td>
-		  <td><input id ='gender'></td>
+		  <td id ='gender'></td>
 		</tr>
 		<tr>
 		  <td>id</td>
-		  <td> <input id = 'id'></td>
+		  <td id = 'id'></td>
 		</tr>
 		<tr>
 		  <td>nickname</td>
-		  <td ><input id = 'nickname'></td>
+		  <td id = 'nickname'></td>
 		</tr>
 		<tr>
 		  <td>name</td>
-		  <td > <input id ='name'/></td>
+		  <td id ='name'></td>
 		</tr>
 		
 	</table>
 	<img id ='profile' alt="프로필이미지" src="">
+	
+  <button onClick = 'tokenDelete()'>삭제</button>
+  <button onClick = 'tokenReload()'>갱신</button>
 </div>
 </body>
 </html>
