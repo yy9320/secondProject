@@ -79,7 +79,7 @@ public class HomeController {
 	    String access_token = "";
 	    String refresh_token = "";
 	    String apiURL;
-	    String redirectURI = "http://127.0.0.1/loginoath.dp";
+	    String redirectURI = "http://127.0.0.1/loginoath.do";
 	    
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
