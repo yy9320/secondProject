@@ -65,6 +65,58 @@ public class HomeController {
 		String token ="";
 		logger.info("loginoath.do ");
 		
+		JSONObject result = new JSONObject();
+		/*
+		 * apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+		    apiURL += "client_id=" + clientId;
+		    apiURL += "&client_secret=" + clientSecret;
+		    apiURL += "&redirect_uri=" + redirectURI;
+		    apiURL += "&code=" + code;
+		    apiURL += "&state=" + state;
+		 */
+		String clientId = "2OckOgKg6tKGkEyvzWXs";//애플리케이션 클라이언트 아이디값";
+	    String clientSecret = "gSiOM0m3Qv";//애플리케이션 클라이언트 시크릿값";
+	    String access_token = "";
+	    String refresh_token = "";
+	    String apiURL;
+	    String redirectURI = "http://127.0.0.1/loginoath.dp";
+	    
+	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+	    apiURL += "client_id=" + clientId;
+	    apiURL += "&client_secret=" + clientSecret;
+	    apiURL += "&redirect_uri=" + redirectURI;
+	    // TODO : code값과 state 값 추가해야함 - 이 값들은 앞에서 가지고 와야함.
+//	    apiURL += "&code=" + code;
+//	    apiURL += "&state=" + state;
+
+	    System.out.println("apiURL="+apiURL);
+	    System.out.println(apiURL);
+	    System.out.println("https://nid.naver.com/oauth2.0/token?grant_type=refresh_token&client_id=jyvqXeaVOVmV&client_secret=527300A0_COq1_XV33cf&refresh_token=c8ceMEJisO4Se7uGCEYKK1p52L93bHXLn");
+	    try {
+	      URL url = new URL(apiURL);
+	      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	      con.setRequestMethod("GET");
+	      int responseCode = con.getResponseCode();
+	      BufferedReader br;
+	      System.out.print("responseCode="+responseCode);
+	      if(responseCode==200) { // 정상 호출
+	        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	      } else {  // 에러 발생
+	        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+	      }
+	      String inputLine;
+	      StringBuffer res = new StringBuffer();
+	      while ((inputLine = br.readLine()) != null) {
+	        res.append(inputLine);
+	      }
+	      br.close();
+	      if(responseCode==200) {
+	    	  System.out.println(res.toString());
+	      }
+	    } catch (Exception e) {
+	      System.out.println(e);
+	    }
+		
 		return "/naver/loginOath";
 		
 	}
@@ -83,7 +135,7 @@ public class HomeController {
 	@ResponseBody
 	public JSONObject tokenReload(Locale locale, Model model, @RequestBody String data) {
 		JSONObject result = new JSONObject();
-		logger.info("token을 가지고 오고 싶다구 token " + data);
+		logger.info("token을 가지고 오고 싶다구 token '" + data + "'");
 		result.put("token", data);
 		String clientId = "2OckOgKg6tKGkEyvzWXs";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "gSiOM0m3Qv";//애플리케이션 클라이언트 시크릿값";
@@ -143,7 +195,7 @@ public class HomeController {
 	@ResponseBody
 	public JSONObject tokenDelete(Locale locale, Model model, @RequestBody String data) {
 		JSONObject result = new JSONObject();
-		logger.info("token을 가지고 오고 싶다구 token " + data);
+		logger.info("token을 가지고 오고 싶다구 token '" + data + "'");
 		result.put("token", data);
 		/*
 		 * access_token	string	삭제 처리된 접근 토큰 값

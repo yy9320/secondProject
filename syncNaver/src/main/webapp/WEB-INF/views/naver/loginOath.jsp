@@ -42,7 +42,7 @@
     	
     }
 	function tokenReload(){
-		var token = naver_id_login.oauthParams.refresh_token;
+		var token = naver_id_login.oauthParams.access_token;
     	var url = 'tokenReload.do'
 	    $.post(url, token, function(data){
 		    alert(data.token);    //gddong
