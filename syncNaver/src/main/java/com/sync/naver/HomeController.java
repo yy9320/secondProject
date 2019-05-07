@@ -3,9 +3,13 @@ package com.sync.naver;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -65,6 +69,43 @@ public class HomeController {
 		String token ="";
 		logger.info("loginoath.do ");
 		
+		String clientId = "2OckOgKg6tKGkEyvzWXs";//애플리케이션 클라이언트 아이디값";
+	    String redirectURI = "http://127.0.0.1/loginoath.do";
+		try {
+			redirectURI = URLEncoder.encode("YOUR_CALLBACK_URL", "UTF-8");
+			SecureRandom random = new SecureRandom();
+			String state = new BigInteger(130, random).toString();
+			String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+			apiURL += "&client_id=" + clientId;
+			apiURL += "&redirect_uri=" + redirectURI;
+			apiURL += "&state=" + state;
+			URL url = new URL(apiURL);
+		      HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		      con.setRequestMethod("GET");
+		      int responseCode = con.getResponseCode();
+		      BufferedReader br;
+		      System.out.print("responseCode="+responseCode);
+		      if(responseCode==200) { // 정상 호출
+		    	  System.out.println("정상");
+		        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		      } else {  // 에러 발생
+		    	  System.out.println("에러");
+		        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		      }
+		      String inputLine;
+		      StringBuffer res = new StringBuffer();
+		      while ((inputLine = br.readLine()) != null) {
+		        res.append(inputLine);
+		      }
+		      br.close();
+		      if(responseCode==200) {
+		    	  System.out.println(res.toString());
+		      }
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
 		JSONObject result = new JSONObject();
 		/*
 		 * apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
@@ -74,12 +115,10 @@ public class HomeController {
 		    apiURL += "&code=" + code;
 		    apiURL += "&state=" + state;
 		 */
-		String clientId = "2OckOgKg6tKGkEyvzWXs";//애플리케이션 클라이언트 아이디값";
 	    String clientSecret = "gSiOM0m3Qv";//애플리케이션 클라이언트 시크릿값";
 	    String access_token = "";
 	    String refresh_token = "";
 	    String apiURL;
-	    String redirectURI = "http://127.0.0.1/loginoath.do";
 	    
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 	    apiURL += "client_id=" + clientId;
