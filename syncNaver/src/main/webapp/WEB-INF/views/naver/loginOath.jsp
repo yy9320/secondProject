@@ -10,7 +10,7 @@
 	}
 </style>
 <script type="text/javascript">
-	var naver_id_login = new naver_id_login("2OckOgKg6tKGkEyvzWXs", "http://127.0.0.1/loginoath.do");
+	var naver_id_login = new naver_id_login("iCCimufOglnCbDHjCAf0", "http://127.0.0.1/loginoath.do");
 	naver_id_login.get_naver_userprofile("naverSignInCallback()");
 // 	  var token = naver_id_login.oauthParams.access_token;
 // 		  var url = 'profileimage.do';
@@ -21,8 +21,8 @@
 	  // 접근 토큰 값 출력
 	  // 네이버 사용자 프로필 조회
 	  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-	alert(naver_id_login.oauthParams.access_token);
-	alert(naver_id_login.oauthParams.refresh_token);
+// 	alert(naver_id_login.oauthParams.access_token);
+// 	alert(naver_id_login.oauthParams.refresh_token);
 	function naverSignInCallback() {
 	    $('#email').text(naver_id_login.getProfileData('email'));
 // 	    $('#email').text('메롱이다');

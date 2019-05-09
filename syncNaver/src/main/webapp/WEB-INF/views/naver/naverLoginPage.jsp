@@ -70,7 +70,7 @@
     </label>
   <div id="naver_id_login"></div>
    <script type="text/javascript">
-	   var clientId = "2OckOgKg6tKGkEyvzWXs";
+	   var clientId = "iCCimufOglnCbDHjCAf0";
 		var naver_id_login = new naver_id_login(clientId, "http://127.0.0.1/loginoath.do");
 	 	var state = naver_id_login.getUniqState();
 	 	naver_id_login.setButton("white", 2,40);
