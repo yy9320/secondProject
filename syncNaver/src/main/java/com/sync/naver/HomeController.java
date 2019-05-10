@@ -141,14 +141,14 @@ public class HomeController {
 	    String apiURL;
 	    String sercive_provider = "NAVER";
 	    access_token = data;
-//	    /*
+
 	    try {
 			access_token = URLEncoder.encode(data, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}			
-//		*/
+
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=refresh_token&";
 	    apiURL += "client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;
@@ -201,21 +201,21 @@ public class HomeController {
 			error	string	에러 코드
 			error_description	string	에러 메시지
 		 */
-		String clientId = "2OckOgKg6tKGkEyvzWXs";//애플리케이션 클라이언트 아이디값";
-	    String clientSecret = "gSiOM0m3Qv";//애플리케이션 클라이언트 시크릿값";
+		String clientId = "iCCimufOglnCbDHjCAf0";//애플리케이션 클라이언트 아이디값";
+	    String clientSecret = "1sJRmEcJoN";//애플리케이션 클라이언트 시크릿값";
 	    String refresh_token = data;
 	    String access_token = "";
 	    String apiURL;
 	    String sercive_provider = "NAVER";
 	    access_token = data;
-//	    /*
+	    /*
 	    try {
 			access_token = URLEncoder.encode(data, "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}			
-//		*/
+		*/
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete&";
 	    apiURL += "client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;
