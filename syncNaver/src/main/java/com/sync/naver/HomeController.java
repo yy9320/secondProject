@@ -13,6 +13,7 @@ import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
@@ -70,6 +71,7 @@ public class HomeController {
 //		locale=ko_KR&
 //		inapp_view=&
 //		oauth_os=
+	
 	@RequestMapping(value = "loginoath.do", method = RequestMethod.GET)
 	public String loginaoth(Locale locale, Model model) {
 		String token ="";
@@ -124,6 +126,70 @@ public class HomeController {
 		JSONObject result = new JSONObject();
 		logger.info("token을 가지고 오고 싶다구 token " + data);
 		result.put("token", data);
+		return result;
+		
+	}
+	// https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=jyvqXeaVOVmV&
+	// client_secret=527300A0_COq1_XV33cf&code=EIc5bFrl4RibFls1&state=9kgsGTfH4j7IyAkg
+
+	@RequestMapping(value = "tokenMake.do", produces="application/json;charset=UTF-8" , method = RequestMethod.POST)
+	@ResponseBody
+	public JSONObject tokenMake(Locale locale, Model model, @RequestBody Map<String, String> data) {
+		JSONObject result = new JSONObject();
+		logger.info("token을 가지고 오고 싶다구 token '" + data + "'");
+		result.put("token", data);
+		String clientId = "iCCimufOglnCbDHjCAf0";//애플리케이션 클라이언트 아이디값";
+		String clientSecret = "1sJRmEcJoN";//애플리케이션 클라이언트 시크릿값";
+//		String refresh_token = data.;
+		String access_token = "";
+		String apiURL;
+		String sercive_provider = "NAVER";
+		access_token = data.get("token");
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString();
+		
+		try {
+			access_token = URLEncoder.encode(access_token, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}			
+		
+		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+		apiURL += "client_id=" + clientId;
+		apiURL += "&client_secret=" + clientSecret;
+		apiURL += "&code=" + data;
+	    apiURL += "&state=" + data.get("state");
+//	    apiURL += "&access_token=" + access_token;
+//		apiURL += "&service_provider=" + sercive_provider;
+		System.out.println("apiURL="+apiURL);
+		System.out.println(apiURL);
+		System.out.println("https://nid.naver.com/oauth2.0/token?grant_type=authorization_code & client_id=jyvqXeaVOVmV & client_secret=527300A0_COq1_XV33cf & code=EIc5bFrl4RibFls1 &state=9kgsGTfH4j7IyAkg");
+		try {
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection)url.openConnection();
+			con.setRequestMethod("GET");
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+			System.out.print("responseCode="+responseCode);
+			if(responseCode==200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else {  // 에러 발생
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			String inputLine;
+			StringBuffer res = new StringBuffer();
+			while ((inputLine = br.readLine()) != null) {
+				res.append(inputLine);
+			}
+			br.close();
+			if(responseCode==200) {
+				System.out.println(res.toString());
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		return result;
 		
 	}
@@ -208,14 +274,14 @@ public class HomeController {
 	    String apiURL;
 	    String sercive_provider = "NAVER";
 	    access_token = data;
-	    /*
+//	    /*
 	    try {
-			access_token = URLEncoder.encode(data, "UTF-8");
+			access_token = URLEncoder.encode("NAVER", "UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}			
-		*/
+//		*/
 	    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=delete&";
 	    apiURL += "client_id=" + clientId;
 	    apiURL += "&client_secret=" + clientSecret;

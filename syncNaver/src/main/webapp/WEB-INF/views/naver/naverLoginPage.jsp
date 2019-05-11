@@ -78,6 +78,7 @@
 	 	naver_id_login.setState(state);
 	 	naver_id_login.setPopup();
 	 	naver_id_login.init_naver_id_login();
+	 	alert(state);
    </script>
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit" href ="https://nid.naver.com/oauth2.0/authorize">Sign in</button>

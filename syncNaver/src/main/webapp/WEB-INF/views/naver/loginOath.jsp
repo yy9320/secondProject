@@ -12,6 +12,8 @@
 <script type="text/javascript">
 	var naver_id_login = new naver_id_login("iCCimufOglnCbDHjCAf0", "http://127.0.0.1/loginoath.do");
 	naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	alert(naver_id_login.getUniqState());
+	var state = naver_id_login.getUniqState();
 // 	  var token = naver_id_login.oauthParams.access_token;
 // 		  var url = 'profileimage.do';
 // 		  $.post(url, token, function(data){
@@ -21,7 +23,7 @@
 	  // 접근 토큰 값 출력
 	  // 네이버 사용자 프로필 조회
 	  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-// 	alert(naver_id_login.oauthParams.access_token);
+	alert(naver_id_login.oauthParams.access_token);
 // 	alert(naver_id_login.oauthParams.refresh_token);
 	function naverSignInCallback() {
 	    $('#email').text(naver_id_login.getProfileData('email'));
@@ -33,6 +35,14 @@
 	    $('#name').text(naver_id_login.getProfileData('name'));
 	    $('#profile').text('src',naver_id_login.getProfileData('profile_image'));
 	}
+	function tokenMake(){
+		var token = naver_id_login.oauthParams.access_token;
+    	var url = 'tokenMake.do'
+	    $.post(url, data : {token:token,state:state}, function(data){
+		    alert(data.token);    //gddong
+		}, "json");
+    	
+    }
 	function tokenDelete (){
 		var token = naver_id_login.oauthParams.access_token;
     	var url = 'tokenDelete.do'
@@ -88,6 +98,7 @@
 	</table>
 	<img id ='profile' alt="프로필이미지" src="">
 	
+  <button onClick = 'tokenMake()'>삭제</button>
   <button onClick = 'tokenDelete()'>삭제</button>
   <button onClick = 'tokenReload()'>갱신</button>
 </div>
